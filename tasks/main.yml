@@ -1,8 +1,4 @@
 ---
-
-- name: install apt dependencies
-  apt: name=awscli
-
 # Install the CodeDeploy agent
 #
 # The official instructions involve running the AWS CLI, which makes Packer builds
@@ -13,8 +9,12 @@
 # AWS CLI does for Debian packages. The most recent install script as of this writing
 # is also included as files/install.
 
-- name: install httplib2
-  pip: name=httplib2
+- name: install utilities
+  pip: name={{ item }} state=present
+  with-items:
+    - httplib2
+    - awscli
+    - aws-shell
 
 - name: determine the bucket URL
   set_fact:
