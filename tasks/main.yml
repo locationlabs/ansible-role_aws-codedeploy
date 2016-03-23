@@ -11,7 +11,7 @@
 
 - name: install utilities
   pip: name={{ item }} state=present
-  with-items:
+  with_items:
     - httplib2
     - awscli
     - aws-shell
